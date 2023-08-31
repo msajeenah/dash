@@ -151,7 +151,7 @@ if selected == "Dashboard":
 if selected == "Social media Analysis":
 
     data = load_data()
-    st.markdown('## Beesline Data Analysis')
+    st.markdown('## Social Media Data Analysis')
     # Retrieve total number of registered societies
     total_societies = len(data)
 
@@ -240,7 +240,7 @@ if selected == "Social media Analysis":
 
             
 
-if selected == "Data Analytics":
+if selected == "Market Basket analysis":
     st.markdown("## Insights")
     data = load_data()
 

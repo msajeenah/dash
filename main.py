@@ -150,7 +150,7 @@ if selected == "Dashboard":
 
 if selected == "Social media Analysis":
 
-    tab1, tab2, tab3 = st.tabs(["New Register", "Appeal", "Details"])
+    tab1, tab2, tab3 = st.tabs(["Details"])
 
     with tab1:
         # Define the sector types

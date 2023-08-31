@@ -55,7 +55,7 @@ with st.sidebar:
     )
 
 def load_data():
-    return pd.read_csv(r"datasetv2.csv", na_values=["NA", "--", "NaN"])
+    return pd.read_csv(r"sampled_data.csv", na_values=["NA", "--", "NaN"])
 
 
 if selected == "Dashboard":
@@ -167,7 +167,7 @@ if selected == "Registration":
         ]
 
         # Load dataset with Indian states and districts
-        data = pd.read_csv('ISD.csv')
+        data = pd.read_csv('sampled_data.csv')
 
         # Fetch all Indian states
         indian_states = data['state'].unique()

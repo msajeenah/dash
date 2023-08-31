@@ -148,7 +148,7 @@ if selected == "Dashboard":
 
 
 
-if selected == "Registration":
+if selected == "Social media Analysis":
 
     tab1, tab2, tab3 = st.tabs(["New Register", "Appeal", "Details"])
 

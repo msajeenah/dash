@@ -150,11 +150,11 @@ if selected == "Dashboard":
 
 if selected == "Social media Analysis":
 
-    tab1, tab2, tab3 = st.tabs(["Details"])
+    tab1 = st.tabs(["Details"])
 
    
 
-    with tab3:
+    with tab1:
         st.markdown("### Society Details")
 
         # Filter by Society ID (optional)

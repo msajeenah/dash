@@ -241,7 +241,7 @@ if selected == "Social media Analysis":
             
 
 if selected == "Market Basket analysis":
-    st.markdown("## Insights")
+    st.markdown("## Market Basket analysis")
     data = load_data()
 
     # Check if the DataFrame has the required columns

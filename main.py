@@ -374,26 +374,4 @@ if selected == "Market Basket analysis":
         st.markdown('#### Details')
         st.dataframe(filtered_df)
 
-if selected == "About":
-    st.markdown('## About')
-    st.markdown('''
-        The Central Registrar for Cooperative Societies (CRCS) is responsible for registering and regulating multistate cooperative societies in India, in accordance with the MSCS Act of 2002.
-        
-        As part of the CRCS Hackathon, we have developed this comprehensive dashboard for the upcoming new CRCS portal. The dashboard aims to streamline the registration process, handle amendments and appeals, and manage annual returns for the registered societies.
-        
-        **Dashboard Features:**
-        - Visualization: The dashboard presents the data from the provided dataset in a visually appealing and easily understandable manner using charts, graphs, and maps.
-        - Filters and Interactivity: Users can interact with the dashboard by incorporating filters, dropdown menus, and selection options to explore and analyze specific aspects of the data.
-        - Key Metrics: The dashboard displays key metrics, summaries, and trends related to MSCS, such as the number of registered MSCS, distribution across states and districts, and popular sectors.
-        - Drill-Down Capabilities: Users can drill down into specific MSCS details, such as their address, registration date, area of operation, and sector type.
-        - Responsive Design: The dashboard is responsive and compatible with different screen sizes and devices for a seamless user experience.
-        - Data Analytics: The dashboard utilizes data analytics techniques to derive meaningful insights from the dataset and presents them in an informative manner.
-        - User-Friendly Interface: The dashboard is designed with an intuitive and user-friendly interface that allows users to navigate effortlessly.
-        
-        We hope that this dashboard will contribute to the efficient management and monitoring of multistate cooperative societies in India. For any queries or feedback, please contact us.
-        
-        ---
-        Dashboard developed for the CRCS Hackathon
-        ''')
-
 

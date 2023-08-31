@@ -150,45 +150,93 @@ if selected == "Dashboard":
 
 if selected == "Social media Analysis":
 
-    tab1 = st.tabs(["Details"])
+    data = load_data()
+    st.markdown('## Beesline Data Analysis')
+    # Retrieve total number of registered societies
+    total_societies = len(data)
 
-   
+    # Calculate the date 30 days ago from today
+    start_date = datetime.datetime.now() - datetime.timedelta(days=30)
+    start_date = start_date.strftime("%Y-%m-%d")
 
-    with tab1:
-        st.markdown("### Society Details")
+    # Retrieve the number of registered societies in the past 30 days
+    societies_in_past_30_days = len(data[data['registration_date'] >= start_date])
 
-        # Filter by Society ID (optional)
-        society_id_filter = st.text_input("Filter by Society ID")
-        data = load_data()
-        data['registration_date'] = pd.to_datetime(data['registration_date']).dt.year
+  
 
-        # Apply filter if Society ID is provided
-        if society_id_filter:
-            filtered_data = data[data['society_id'] == society_id_filter]
+    # Filter by years
+    if 'registration_date' in data.columns:
+        data['registration_date'] = pd.to_datetime(data['registration_date'])
+        data['Year'] = data['registration_date'].dt.year
+        min_year = int(data['Year'].min())
+        max_year = int(data['Year'].max())
+        selected_years = st.sidebar.slider("Select Year Range", min_year, max_year, (min_year, max_year), help="Shows the number of registrations over the selected years.")
+    else:
+        selected_years = []
+
+    # Filter by sectors
+    all_sectors = data['sector_type'].unique()
+    selected_sectors_all = st.sidebar.checkbox("Select All Sectors", value=True, key="all_sectors_checkbox")
+    if selected_sectors_all:
+        selected_sectors = st.sidebar.multiselect("Select Sectors", all_sectors, default=all_sectors, help="Displays the distribution of registered societies by sector.")
+    else:
+        selected_sectors = []
+
+    st.markdown("#### chart Analysis")
+
+    if selected_years:
+        filtered_data = data[data['Year'].between(selected_years[0], selected_years[1])]
+        yearly_registration = filtered_data['Year'].value_counts().sort_index().reset_index()
+        yearly_registration.columns = ['Year', 'Registrations']
+    else:
+        yearly_registration = data['Year'].value_counts().sort_index().reset_index()
+        yearly_registration.columns = ['Year', 'Registrations']
+
+    # Format x-axis label as string
+    fig = px.line(yearly_registration, x='Year', y='Registrations')
+    fig.update_xaxes(title="Year")
+    fig.update_yaxes(title="Number of Beesline products")
+    fig.update_layout(height=250, width=400)
+    st.plotly_chart(fig, use_container_width=True)
+
+    r1, r2 = st.columns((7, 3))
+
+    with r1:
+
+        st.markdown("#### Pie chart")
+
+        if selected_sectors:
+            filtered_sector_counts = data[data['sector_type'].isin(selected_sectors)]['sector_type'].value_counts()
         else:
-            filtered_data = data
+            filtered_sector_counts = data['sector_type'].value_counts()
 
-        if not filtered_data.empty:
-            # Format the header names
-            header_mapping = {
-                'society_name': 'Society Name',
-                'address': 'Address',
-                'state': 'State',
-                'district': 'District',
-                'registration_date': 'Registration Date',
-                'area_of_operation': 'Area of Operation',
-                'sector_type': 'Sector Type'
-            }
-            filtered_data = filtered_data.rename(columns=header_mapping)
+        # Example: Pie chart of sector distribution
+        sector_distribution = filtered_sector_counts  # Use the filtered counts for the pie chart
+        fig2 = px.pie(sector_distribution, values=sector_distribution.values, names=sector_distribution.index, height=400, width=400)
+        st.plotly_chart(fig2)
 
-            # Reset the index and show data with a single index starting from 1
-            filtered_data.reset_index(drop=True, inplace=True)
-            filtered_data.index += 1
+    # Calculate the total number of members per sector
+    members_by_sector = filtered_data.groupby('sector_type')['num_members'].sum()
 
-            # Display the filtered data with the requested details
-            st.dataframe(filtered_data[['Society Name', 'Address', 'State', 'District', 'Registration Date', 'Area of Operation', 'Sector Type']])
-        else:
-            st.info("No data found.")
+    # Convert the dictionary values to integers
+    members_by_sector = members_by_sector.astype(int)
+
+    # Calculate the total number of members per year
+    members_by_year = filtered_data.groupby('Year')['num_members'].sum()
+
+    # Convert the dictionary values to integers
+    members_by_year = members_by_year.astype(int)
+
+    if selected_years:
+        members_by_selected_year = members_by_year.loc[selected_years[0]:selected_years[1]].sum()
+    else:
+        members_by_selected_year = members_by_year.sum()
+
+     # Display members by sector
+    r2.metric("products criteria", "")
+    for sector, count in members_by_sector.items():
+        r2.write(f"{sector}: {count}")
+
 
             
 

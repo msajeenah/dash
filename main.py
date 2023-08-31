@@ -482,7 +482,3 @@ if selected == "About":
         ''')
 
 
-st.sidebar.markdown('''
----
-Created by [Sathish]('https://github.com/sathish-1804/CRCS_dashboard').
-''')

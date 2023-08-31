@@ -1,0 +1,133 @@
+/* Logo */
+/* Adapted from Zachary Blackwood */
+
+
+[data-testid="stSidebar"] {
+  background-image: url(https://streamlit.io/images/brand/streamlit-logo-secondary-colormark-darktext.png);
+  background-size: 200px;
+  background-repeat: no-repeat;
+  background-position: 4px 20px;
+    /* Animation */
+    animation-name: fade-in;
+    animation-duration: 1s;
+    animation-timing-function: ease-in-out;
+}
+
+/*
+div.css-1bcsrn5.esravye1{
+  background-color: #FFFFFF;
+  border: 1px solid #CCCCCC;
+  padding: 2% 2% 2% 6%;
+  border-radius: 10px;
+  box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15) !important;
+   animation-name: fade-in;
+   animation-duration: 1s;
+   animation-timing-function: ease-in-out;
+}
+*/
+
+
+/*Don't change below*/ 
+div.css-1bzkvni.esravye1{
+  background-color: #FFFFFF;
+  border: 1px solid #CCCCCC;
+  padding: 2% 2% 2% 6%;
+  border-radius: 10px;
+
+  border-left: 0.5rem solid #9AD8E1 !important;
+  box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15) !important;
+
+  /* Animation */
+   animation-name: fade-in;
+   animation-duration: 1s;
+   animation-timing-function: ease-in-out;
+}
+
+div.css-1r6slb0.esravye1 {
+  background-color: #FFFFFF;
+  border: 1px solid #CCCCCC;
+  padding: 2% 2% 2% 6%;
+  border-radius: 10px;
+
+  border-left: 0.5rem solid #9AD8E1 !important;
+  box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15) !important;
+
+  /* Animation */
+   animation-name: fade-in;
+   animation-duration: 1s;
+   animation-timing-function: ease-in-out;
+}
+
+@keyframes fade-in {
+   0% {
+       opacity: 0;
+   }
+   100% {
+       opacity: 1;
+   }
+}
+
+div.element-container.css-15qwjnv.esravye2{
+  display: flex;
+}
+
+div.css-3mmywe.e15ugz7a0 {
+    background-color: #FFFFFF;
+    padding: 6%;
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    box-sizing: border-box; /* Include padding and border in the total width */
+    max-width: 100%; /* Ensure the div doesn't exceed the available width */
+
+      /* Animation */
+   animation-name: fade-in;
+   animation-duration: 1s;
+   animation-timing-function: ease-in-out;
+}
+
+  
+
+label.css-mkogse.e16fv1kl2 {
+color: #36b9cc !important;
+font-weight: 700 !important;
+text-transform: uppercase !important;
+}
+
+
+@media only screen and (max-width: 600px) {
+  /* Adjust the width of the chart container for mobile screens */
+  div.css-18zj2f1 {
+    width: 100%;
+    height: 300px;
+  }
+}
+
+
+[data-testid="stSidebar"] {
+  overflow-y: auto !important;
+}
+
+.plotly-graph-div .modebar {
+  top: auto !important;
+  bottom: 50px !important;
+}
+
+@media only screen and (max-width: 767px) {
+  .plotly-graph-div .modebar {
+      bottom: 0px !important;
+  }
+}
+
+/* Move block container higher */
+div.block-container.css-18e3th9.egzxvld2 {
+margin-top: -5em;
+}
+
+#MainMenu {visibility: hidden;}
+footer {visibility: hidden;}
+
+div.block-container.css-z5fcl4.e1g8pov64{
+margin-top: -5em;
+}
+/* Path: static\style.css */

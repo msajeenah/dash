@@ -79,6 +79,35 @@ if selected == "Dashboard":
 
 
 
+
+
+
+  st.markdown('## beesline')
+    # Retrieve total number of registered societies
+    total_societies = len(data)
+
+    # Calculate the date 30 days ago from today
+    start_date = datetime.datetime.now() - datetime.timedelta(days=30)
+    start_date = start_date.strftime("%Y-%m-%d")
+
+    # Retrieve the number of registered societies in the past 30 days
+    societies_in_past_30_days = len(data[data['registration_date'] >= start_date])
+
+    # Display the metrics in the Streamlit app
+    col1, col2, col3, = st.columns(3)
+    col1.metric("Registered Societies", total_societies, f"+{societies_in_past_30_days}", help="Shows Total Registered Society and changes in the last 30 days")
+    col2.metric("Active members", f"{data['num_members'].sum()}", "-1", help="Active Members and changes in the last 30 days (**Note**: Contains sample data)")
+    col3.metric("Events Organized", "32", "+2", help="Events organized and changes in the last 30 days (**Note**: Contains sample data)")
+
+
+
+
+
+
+
+
+    
+
     st.sidebar.markdown("### Filters")
 
     # Filter by years

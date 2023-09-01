@@ -11,7 +11,7 @@ import random
 
 # Page setting
 st.set_page_config(
-    page_title="Beesline Dashboard",
+    page_title="CRCS Dashboard",
     layout="wide",
     initial_sidebar_state='expanded',
 )
@@ -41,7 +41,7 @@ with open('style.css') as f:
 with st.sidebar:
     selected= option_menu(
         menu_title=None,
-        options=["Dashboard", "Social media Analysis", "Market Basket analysis"],
+        options=["Dashboard", "Registration", "Data Analytics", "About"],
         icons=["speedometer2","person-add","bar-chart", "info-circle"],
         default_index=0,
         styles= {
@@ -60,7 +60,7 @@ def load_data():
 
 if selected == "Dashboard":
     data = load_data()
-    st.markdown('## Beesline Data Analysis')
+    st.markdown('## Overview')
     # Retrieve total number of registered societies
     total_societies = len(data)
 
@@ -71,7 +71,13 @@ if selected == "Dashboard":
     # Retrieve the number of registered societies in the past 30 days
     societies_in_past_30_days = len(data[data['registration_date'] >= start_date])
 
-  
+    # Display the metrics in the Streamlit app
+    col1, col2, col3 = st.columns(3)
+    col1.metric("Registered Societies", total_societies, f"+{societies_in_past_30_days}", help="Shows Total Registered Society and changes in the last 30 days")
+    col2.metric("Active members", f"{data['num_members'].sum()}", "-1", help="Active Members and changes in the last 30 days (**Note**: Contains sample data)")
+    col3.metric("Events Organized", "32", "+2", help="Events organized and changes in the last 30 days (**Note**: Contains sample data)")
+
+    st.sidebar.markdown("### Filters")
 
     # Filter by years
     if 'registration_date' in data.columns:
@@ -91,7 +97,7 @@ if selected == "Dashboard":
     else:
         selected_sectors = []
 
-    st.markdown("#### chart Analysis")
+    st.markdown("#### Registration Trends")
 
     if selected_years:
         filtered_data = data[data['Year'].between(selected_years[0], selected_years[1])]
@@ -104,7 +110,7 @@ if selected == "Dashboard":
     # Format x-axis label as string
     fig = px.line(yearly_registration, x='Year', y='Registrations')
     fig.update_xaxes(title="Year")
-    fig.update_yaxes(title="Number of Beesline products")
+    fig.update_yaxes(title="Number of Registrations")
     fig.update_layout(height=250, width=400)
     st.plotly_chart(fig, use_container_width=True)
 
@@ -112,7 +118,7 @@ if selected == "Dashboard":
 
     with r1:
 
-        st.markdown("#### Pie chart")
+        st.markdown("#### Sector Distribution")
 
         if selected_sectors:
             filtered_sector_counts = data[data['sector_type'].isin(selected_sectors)]['sector_type'].value_counts()
@@ -142,106 +148,185 @@ if selected == "Dashboard":
         members_by_selected_year = members_by_year.sum()
 
      # Display members by sector
-    r2.metric("products criteria", "")
+    r2.metric("Members by Sector", "")
     for sector, count in members_by_sector.items():
         r2.write(f"{sector}: {count}")
 
 
 
-if selected == "Social media Analysis":
+if selected == "Registration":
 
-    data = load_data()
-    st.markdown('## Social Media Data Analysis')
-    # Retrieve total number of registered societies
-    total_societies = len(data)
+    tab1, tab2, tab3 = st.tabs(["New Register", "Appeal", "Details"])
 
-    # Calculate the date 30 days ago from today
-    start_date = datetime.datetime.now() - datetime.timedelta(days=30)
-    start_date = start_date.strftime("%Y-%m-%d")
+    with tab1:
+        # Define the sector types
+        SECTOR_TYPES = [
+            'Agro', 'Construction', 'Cooperative Bank', 'Credit', 'Dairy', 'Federation',
+            'Fisheries', 'Health/Hospital', 'Housing', 'Industrial/Textile', 'Marketing',
+            'Tourism'
+        ]
 
-    # Retrieve the number of registered societies in the past 30 days
-    societies_in_past_30_days = len(data[data['registration_date'] >= start_date])
+        # Load dataset with Indian states and districts
+        data = pd.read_csv('ISD.csv')
 
-  
+        # Fetch all Indian states
+        indian_states = data['state'].unique()
 
-    # Filter by years
-    if 'registration_date' in data.columns:
-        data['registration_date'] = pd.to_datetime(data['registration_date'])
-        data['Year'] = data['registration_date'].dt.year
-        min_year = int(data['Year'].min())
-        max_year = int(data['Year'].max())
-        selected_years = st.sidebar.slider("Select Year Range", min_year, max_year, (min_year, max_year), help="Shows the number of registrations over the selected years.")
-    else:
-        selected_years = []
+        def generate_society_id():
+            # Generate a random alphanumeric string
+            chars = string.ascii_uppercase + string.ascii_lowercase + string.digits
+            random_string = ''.join(random.choices(chars, k=4))
 
-    # Filter by sectors
-    all_sectors = data['sector_type'].unique()
-    selected_sectors_all = st.sidebar.checkbox("Select All Sectors", value=True, key="all_sectors_checkbox")
-    if selected_sectors_all:
-        selected_sectors = st.sidebar.multiselect("Select Sectors", all_sectors, default=all_sectors, help="Displays the distribution of registered societies by sector.")
-    else:
-        selected_sectors = []
+            # Get the current date and time
+            now = datetime.datetime.now()
 
-    st.markdown("#### chart Analysis")
+            # Format the date and time components
+            date_component = now.strftime("%Y%m%d")
+            time_component = now.strftime("%H%M%S")
 
-    if selected_years:
-        filtered_data = data[data['Year'].between(selected_years[0], selected_years[1])]
-        yearly_registration = filtered_data['Year'].value_counts().sort_index().reset_index()
-        yearly_registration.columns = ['Year', 'Registrations']
-    else:
-        yearly_registration = data['Year'].value_counts().sort_index().reset_index()
-        yearly_registration.columns = ['Year', 'Registrations']
+            # Combine the components and random string to form the society ID
+            society_id = f"SOC-{date_component}{time_component}{random_string}"
 
-    # Format x-axis label as string
-    fig = px.line(yearly_registration, x='Year', y='Registrations')
-    fig.update_xaxes(title="Year")
-    fig.update_yaxes(title="Number of Beesline products")
-    fig.update_layout(height=250, width=400)
-    st.plotly_chart(fig, use_container_width=True)
+            # Truncate or pad the society ID to a length of 10 characters
+            society_id = society_id[:10].ljust(10, '0')
 
-    r1, r2 = st.columns((7, 3))
+            return society_id
 
-    with r1:
+        def fetch_districts(state):
+            if state:
+                districts = data[data['state'] == state]['district'].unique()
+                return districts
+            return []
 
-        st.markdown("#### Pie chart")
+        def register_society():
+            st.markdown("### Cooperative Society Registration")
 
-        if selected_sectors:
-            filtered_sector_counts = data[data['sector_type'].isin(selected_sectors)]['sector_type'].value_counts()
+            # Form inputs
+            society_name = st.text_input("Society Name")
+            address = st.text_area("Address", height=100)  # Increase the height of the address field
+            state = st.selectbox("State", indian_states, key="state")
+
+            # Fetch districts based on the selected state
+            districts = fetch_districts(state)
+            district = st.selectbox("District", np.append(districts, "Other"), key="district")
+
+            if district == "Other":
+                district = st.text_input("Other District")
+
+            area_of_operation = st.multiselect("Area of Operation", indian_states[:-1])
+            sector_type = st.selectbox("Sector Type", SECTOR_TYPES)
+
+            if st.button("Submit"):
+                # Validate form inputs
+                if not society_name or not address or not state or not district or not area_of_operation or not sector_type:
+                    st.warning("Please fill in all the required fields.")
+                elif district == "Other" and not district:
+                    st.warning("Please enter the Other District.")
+                else:
+                    society_id = generate_society_id()
+                    # Prepare the registration data
+                    registration_data = {
+                        "society_id": society_id,
+                        "society_name": society_name,
+                        "address": address,
+                        "state": state,
+                        "district": district,
+                        "registration_date": datetime.datetime.now(),
+                        "area_of_operation": ", ".join(area_of_operation),
+                        "sector_type": sector_type,
+                    }
+
+                    # Write the registration data to a CSV file
+                    with open("dataset.csv", "a") as file:
+                        registration_row = ",".join([str(value) for value in registration_data.values()])
+                        file.write(registration_row + "\n")
+
+                    # Provide confirmation message or next steps
+                    st.success("Society registered successfully!")
+                    
+                    # Show registered data
+                    registered_data = pd.DataFrame([registration_data])
+                    registered_data.index = registered_data.index + 1  # Start index from 1
+                    st.markdown("#### Detail")
+                    st.dataframe(registered_data.rename(columns=lambda x: x.replace("_", " ").title()))
+                        
+                return None
+            
+        register_society()
+
+    with tab2:
+        st.markdown("### Amendments and appealing")
+        
+        def handle_amendments_appeals():
+            global data  # Declare data as a global variable
+
+            # Form inputs for amendments and appeals
+            society_id = st.text_input("Society ID")
+            change_details = st.text_area("Change Details")
+            appeal_reason = st.text_area("Appeal Reason")
+
+            if st.button("Submit Request"):
+                # Validate form inputs
+                if not society_id or not change_details or not appeal_reason:
+                    st.warning("Please fill in all the required fields.")
+                else:
+                    # Save the request to the dataset
+                    request = {
+                        "society_id": society_id,
+                        "change_details": change_details,
+                        "appeal_reason": appeal_reason,
+                        "status": "Pending"  # Assuming status starts as "Pending"
+                    }
+                    
+                    st.success("Request submitted successfully!")
+                    request_data = pd.DataFrame([request])
+                    request_data.index = request_data.index + 1  # Start index from 1
+                    st.markdown("#### Detail")
+                    st.dataframe(request_data.rename(columns=lambda x: x.replace("_", " ").title()))
+                    
+
+        handle_amendments_appeals()
+
+    with tab3:
+        st.markdown("### Society Details")
+
+        # Filter by Society ID (optional)
+        society_id_filter = st.text_input("Filter by Society ID")
+        data = load_data()
+        data['registration_date'] = pd.to_datetime(data['registration_date']).dt.year
+
+        # Apply filter if Society ID is provided
+        if society_id_filter:
+            filtered_data = data[data['society_id'] == society_id_filter]
         else:
-            filtered_sector_counts = data['sector_type'].value_counts()
+            filtered_data = data
 
-        # Example: Pie chart of sector distribution
-        sector_distribution = filtered_sector_counts  # Use the filtered counts for the pie chart
-        fig2 = px.pie(sector_distribution, values=sector_distribution.values, names=sector_distribution.index, height=400, width=400)
-        st.plotly_chart(fig2)
+        if not filtered_data.empty:
+            # Format the header names
+            header_mapping = {
+                'society_name': 'Society Name',
+                'address': 'Address',
+                'state': 'State',
+                'district': 'District',
+                'registration_date': 'Registration Date',
+                'area_of_operation': 'Area of Operation',
+                'sector_type': 'Sector Type'
+            }
+            filtered_data = filtered_data.rename(columns=header_mapping)
 
-    # Calculate the total number of members per sector
-    members_by_sector = filtered_data.groupby('sector_type')['num_members'].sum()
+            # Reset the index and show data with a single index starting from 1
+            filtered_data.reset_index(drop=True, inplace=True)
+            filtered_data.index += 1
 
-    # Convert the dictionary values to integers
-    members_by_sector = members_by_sector.astype(int)
-
-    # Calculate the total number of members per year
-    members_by_year = filtered_data.groupby('Year')['num_members'].sum()
-
-    # Convert the dictionary values to integers
-    members_by_year = members_by_year.astype(int)
-
-    if selected_years:
-        members_by_selected_year = members_by_year.loc[selected_years[0]:selected_years[1]].sum()
-    else:
-        members_by_selected_year = members_by_year.sum()
-
-     # Display members by sector
-    r2.metric("products criteria", "")
-    for sector, count in members_by_sector.items():
-        r2.write(f"{sector}: {count}")
-
+            # Display the filtered data with the requested details
+            st.dataframe(filtered_data[['Society Name', 'Address', 'State', 'District', 'Registration Date', 'Area of Operation', 'Sector Type']])
+        else:
+            st.info("No data found.")
 
             
 
-if selected == "Market Basket analysis":
-    st.markdown("## Market Basket analysis")
+if selected == "Data Analytics":
+    st.markdown("## Insights")
     data = load_data()
 
     # Check if the DataFrame has the required columns
@@ -374,4 +459,30 @@ if selected == "Market Basket analysis":
         st.markdown('#### Details')
         st.dataframe(filtered_df)
 
+if selected == "About":
+    st.markdown('## About')
+    st.markdown('''
+        The Central Registrar for Cooperative Societies (CRCS) is responsible for registering and regulating multistate cooperative societies in India, in accordance with the MSCS Act of 2002.
+        
+        As part of the CRCS Hackathon, we have developed this comprehensive dashboard for the upcoming new CRCS portal. The dashboard aims to streamline the registration process, handle amendments and appeals, and manage annual returns for the registered societies.
+        
+        **Dashboard Features:**
+        - Visualization: The dashboard presents the data from the provided dataset in a visually appealing and easily understandable manner using charts, graphs, and maps.
+        - Filters and Interactivity: Users can interact with the dashboard by incorporating filters, dropdown menus, and selection options to explore and analyze specific aspects of the data.
+        - Key Metrics: The dashboard displays key metrics, summaries, and trends related to MSCS, such as the number of registered MSCS, distribution across states and districts, and popular sectors.
+        - Drill-Down Capabilities: Users can drill down into specific MSCS details, such as their address, registration date, area of operation, and sector type.
+        - Responsive Design: The dashboard is responsive and compatible with different screen sizes and devices for a seamless user experience.
+        - Data Analytics: The dashboard utilizes data analytics techniques to derive meaningful insights from the dataset and presents them in an informative manner.
+        - User-Friendly Interface: The dashboard is designed with an intuitive and user-friendly interface that allows users to navigate effortlessly.
+        
+        We hope that this dashboard will contribute to the efficient management and monitoring of multistate cooperative societies in India. For any queries or feedback, please contact us.
+        
+        ---
+        Dashboard developed for the CRCS Hackathon
+        ''')
 
+
+st.sidebar.markdown('''
+---
+Created by [Sathish]('https://github.com/sathish-1804/CRCS_dashboard').
+''')

@@ -72,10 +72,14 @@ if selected == "Dashboard":
     societies_in_past_30_days = len(data[data['registration_date'] >= start_date])
 
     # Display the metrics in the Streamlit app
-    col1, col2, col3 = st.columns(3)
+    col1, col2, col3, col4, col5, col6 = st.columns(6)
     col1.metric("Registered Societies", total_societies, f"+{societies_in_past_30_days}", help="Shows Total Registered Society and changes in the last 30 days")
     col2.metric("Active members", f"{data['num_members'].sum()}", "-1", help="Active Members and changes in the last 30 days (**Note**: Contains sample data)")
     col3.metric("Events Organized", "32", "+2", help="Events organized and changes in the last 30 days (**Note**: Contains sample data)")
+    col4.metric("Registered Societies", total_societies, f"+{societies_in_past_30_days}", help="Shows Total Registered Society and changes in the last 30 days")
+    col5.metric("Active members", f"{data['num_members'].sum()}", "-1", help="Active Members and changes in the last 30 days (**Note**: Contains sample data)")
+    col6.metric("Events Organized", "32", "+2", help="Events organized and changes in the last 30 days (**Note**: Contains sample data)")
+
 
     st.sidebar.markdown("### Filters")
 

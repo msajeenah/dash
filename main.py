@@ -8,7 +8,7 @@ import numpy as np
 import datetime
 import string
 import random
-
+from PIL import Image
 # Page setting
 st.set_page_config(
     page_title="Beesline Dashboard",
@@ -385,7 +385,8 @@ if selected == "Data Visulaization":
 
 def main():
 
-  image = Image.open("beesline.png")
+  
+    image = Image.open("beesline.png")
     container.image(image, width=200)
     container.write(" #   Beesline Data Analysis and Visualization # ")
     

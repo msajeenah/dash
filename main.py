@@ -383,7 +383,7 @@ if selected == "Data Visulaization":
     st.markdown("## Data Visulaization")
 
 
-
+def main():
 
   image = Image.open("beesline.png")
     container.image(image, width=200)

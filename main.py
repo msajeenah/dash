@@ -159,14 +159,7 @@ if selected == "Social media Analysis":
     data = load_data()
     st.markdown('## Social Media Data Analysis')
     # Retrieve total number of registered societies
-   total_societies = len(data)
 
-    # Calculate the date 30 days ago from today
-    start_date = datetime.datetime.now() - datetime.timedelta(days=30)
-    start_date = start_date.strftime("%Y-%m-%d")
-
-    # Retrieve the number of registered societies in the past 30 days
-    societies_in_past_30_days = len(data[data['registration_date'] >= start_date])
 
   # Display the metrics in the Streamlit app
     col1, col2, col3 = st.columns(3)

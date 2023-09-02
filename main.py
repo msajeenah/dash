@@ -379,5 +379,5 @@ if selected == "Market Basket analysis":
         st.markdown('#### Details')
         st.dataframe(filtered_df)
 
-if selected == "Market Basket analysis":
+if selected == "Data Visulaization":
     st.markdown("## Market Basket analysis")

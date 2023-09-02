@@ -156,17 +156,19 @@ if selected == "Dashboard":
 
 if selected == "Social media Analysis":
 
-    data = load_data()
-    st.markdown('## Social Media Data Analysis')
+   data = load_data()
+    st.markdown('## Overview')
     # Retrieve total number of registered societies
-  start_date = datetime.datetime.now() - datetime.timedelta(days=30)
+    total_societies = len(data)
+
+    # Calculate the date 30 days ago from today
+    start_date = datetime.datetime.now() - datetime.timedelta(days=30)
     start_date = start_date.strftime("%Y-%m-%d")
 
     # Retrieve the number of registered societies in the past 30 days
     societies_in_past_30_days = len(data[data['registration_date'] >= start_date])
 
-
-  # Display the metrics in the Streamlit app
+    # Display the metrics in the Streamlit app
     col1, col2, col3 = st.columns(3)
     col1.metric("Registered Societies", total_societies, f"+{societies_in_past_30_days}", help="Shows Total Registered Society and changes in the last 30 days")
     col2.metric("Active members", f"{data['num_members'].sum()}", "-1", help="Active Members and changes in the last 30 days (**Note**: Contains sample data)")
@@ -192,7 +194,7 @@ if selected == "Social media Analysis":
     else:
         selected_sectors = []
 
-    st.markdown("#### chart Analysis")
+    st.markdown("#### Registration Trends")
 
     if selected_years:
         filtered_data = data[data['Year'].between(selected_years[0], selected_years[1])]
@@ -205,7 +207,7 @@ if selected == "Social media Analysis":
     # Format x-axis label as string
     fig = px.line(yearly_registration, x='Year', y='Registrations')
     fig.update_xaxes(title="Year")
-    fig.update_yaxes(title="Number of Beesline products")
+    fig.update_yaxes(title="Number of Registrations")
     fig.update_layout(height=250, width=400)
     st.plotly_chart(fig, use_container_width=True)
 
@@ -213,7 +215,7 @@ if selected == "Social media Analysis":
 
     with r1:
 
-        st.markdown("#### Pie chart")
+        st.markdown("#### Sector Distribution")
 
         if selected_sectors:
             filtered_sector_counts = data[data['sector_type'].isin(selected_sectors)]['sector_type'].value_counts()
@@ -243,11 +245,9 @@ if selected == "Social media Analysis":
         members_by_selected_year = members_by_year.sum()
 
      # Display members by sector
-    r2.metric("products criteria", "")
+    r2.metric("Members by Sector", "")
     for sector, count in members_by_sector.items():
         r2.write(f"{sector}: {count}")
-
-
             
 
 if selected == "Market Basket analysis":

@@ -380,7 +380,7 @@ if selected == "Market Basket analysis":
         st.dataframe(filtered_df)
 
 if selected == "Data Visulaization":
-    st.markdown("## Market Basket analysis")
+    st.markdown("## Data Visulaization")
 
 
 st.write("Upload a CSV file and explore the data visualization.")

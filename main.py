@@ -383,89 +383,67 @@ if selected == "Data Visulaization":
     st.markdown("## Data Visulaization")
 
 
-st.write("Upload a CSV file and explore the data visualization.")
 
-# Create a file uploader widget
-file = st.file_uploader("Upload CSV file", type=["csv"])
 
-# Check if a file is uploaded
-if file is not None:
-    # Read the CSV file data
-    data = pd.read_csv(file)
+  image = Image.open("beesline.png")
+    container.image(image, width=200)
+    container.write(" #   Beesline Data Analysis and Visualization # ")
     
-   # Perform data preprocessing
-    data['time'] = pd.to_datetime(data['time'])
-    
-    # Calculate device-wise efficiency and average RPM
-    data['Efficiency'] = data['SubTotal (Before Discount)'] / (data['SubTotal (Before Discount)'] + data['Item Discounted Price'])
-    avg_rpm = data['Grand Total'].mean()
-    
-    # Display the data in a table
-    st.subheader("Data Table")
-    st.dataframe(data)
-    
-    # Get the list of column names
-    column_names = data.columns.tolist()
-    
-    # Select the x-axis and y-axis fields
-    x_axis = st.selectbox("Select X-axis field", column_names)
-    y_axis = st.selectbox("Select Y-axis field", column_names)
-    
-    # Select the type of graph to plot
-    graph_type = st.selectbox("Select Graph Type", ["Line Plot", "Scatter Plot", "Bar Plot", "Area Plot", "Histogram"])
-    
-    # Perform additional data preprocessing based on the selected graph type
-    if graph_type in ["Line Plot", "Scatter Plot", "Bar Plot", "Area Plot"]:
-        data = data.dropna(subset=[x_axis, y_axis])
-    
-    # Visualize the data based on the selected graph type
-    st.subheader("Data Visualization")
-    st.write(f"Visualizing {y_axis} vs {x_axis}")
-    
-    with st.spinner("Generating visualization..."):
-        if graph_type == "Line Plot":
-            fig = px.line(data, x=x_axis, y=y_axis, title=f"{y_axis} vs {x_axis}")
-            fig.update_traces(mode='markers+lines')
-            fig.update_layout(showlegend=False)
-            fig.frames = [go.Frame(data=[go.Scatter(x=data[x_axis][:i+1], y=data[y_axis][:i+1], mode='markers')]) for i in range(len(data))]
+    st.sidebar.image(image, width=50)
+    file_option = st.sidebar.radio("Data Source", options=["Upload Local File", "Enter Online Dataset"])
+    file = None
+    data = None
 
-        elif graph_type == "Scatter Plot":
-            fig = px.scatter(data, x=x_axis, y=y_axis, title=f"{y_axis} vs {x_axis}")
-            fig.update_layout(showlegend=False)
+    if file_option == "Upload Local File":
+        file = st.sidebar.file_uploader("Upload a data set in CSV or EXCEL format", type=["csv", "excel"])
 
-        elif graph_type == "Bar Plot":
-            fig = px.bar(data, x=x_axis, y=y_axis, title=f"{y_axis} vs {x_axis}")
-            fig.update_layout(showlegend=False)
+    elif file_option == "Enter Online Dataset":
+        online_dataset = st.sidebar.text_input("Enter the URL of the online dataset")
+        if online_dataset:
+            try:
+                response = requests.get(online_dataset)
+                if response.ok:
+                    data = pd.read_csv(online_dataset)
+                else:
+                    st.warning("Unable to fetch the dataset from the provided link.")
+            except:
+                st.warning("Invalid URL or unable to read the dataset from the provided link.")
 
-        elif graph_type == "Area Plot":
-            fig = px.area(data, x=x_axis, y=y_axis, title=f"{y_axis} vs {x_axis}")
-            fig.update_layout(showlegend=False)
+    options = st.sidebar.radio('Pages', options=['Data Analysis', 'Data visualization'])
 
-        elif graph_type == "Histogram":
-            fig = px.histogram(data, x=y_axis, title=f"{y_axis} Histogram")
-            fig.update_layout(showlegend=False)
-        
-    st.plotly_chart(fig)
+    if file is not None:
+        data = load_data(file)
+
+    if options == 'Data Analysis':
+        if data is not None:
+            analyze_data(data)
+        else:
+            st.warning("No file or empty file")
+
+    elif options == 'Data visualization':
+        if data is not None:
+            # Create a sidebar for user options
+            st.sidebar.title("Chart Options")
+
+
+            st.write("### Select Columns")
+            all_columns = data.columns.tolist()
+            options_key = "_".join(all_columns)
+            selected_columns = st.sidebar.multiselect("Select columns", options=all_columns)
+            if selected_columns:
+                sub_df = data[selected_columns]
+
+
+                chart_type = st.sidebar.selectbox("Select a chart type", ["Bar", "Line", "Scatter", "Histogram", "Pie"])
+
+                x_column = st.sidebar.selectbox("Select the X column", sub_df.columns)
+
+                y_column = st.sidebar.selectbox("Select the Y column", sub_df.columns)
+
+                create_chart(chart_type, sub_df, x_column, y_column)
+
     
-    # Conclusion based on data visualization
-    st.subheader("Conclusion")
-    
-    if graph_type in ["Line Plot", "Scatter Plot"]:
-        st.write(f"The {y_axis} tends to vary with {x_axis}.")
-    elif graph_type == "Bar Plot":
-        st.write(f"The {y_axis} shows different values for different {x_axis}.")
-    elif graph_type == "Area Plot":
-        st.write(f"The area under the curve represents the cumulative {y_axis} with respect to {x_axis}.")
-    elif graph_type == "Histogram":
-        st.write(f"The histogram shows the distribution of {y_axis} values.")
+       
 
-    # Display device-wise efficiency and average RPM
-    st.subheader("Device-wise Efficiency")
-    efficiency_fig = px.bar(data, x="Device_id", y="Efficiency", title="Device-wise Efficiency")
-    efficiency_fig.update_layout(showlegend=False)
-    st.plotly_chart(efficiency_fig)
-    st.write(f"The device-wise efficiency visualization highlights variations in efficiency across devices.")
-    
-    st.subheader("Average Grand Total")
-    st.write(f"The average Grand Total is: {avg_rpm}")
-    st.write(f"The average Grand Total gives an idea of the overall Item Price.")
+if __name__ == "__main__":
+    main()

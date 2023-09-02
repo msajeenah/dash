@@ -397,8 +397,8 @@ if file is not None:
     data['time'] = pd.to_datetime(data['time'])
     
     # Calculate device-wise efficiency and average RPM
-    data['Efficiency'] = data['Total_rotations'] / (data['Total_rotations'] + data['Off_time'])
-    avg_rpm = data['RPM'].mean()
+    data['Efficiency'] = data['SubTotal (Before Discount)'] / (data['SubTotal (Before Discount)'] + data['Item Discounted Price'])
+    avg_rpm = data['Grand Total'].mean()
     
     # Display the data in a table
     st.subheader("Data Table")
@@ -466,6 +466,6 @@ if file is not None:
     st.plotly_chart(efficiency_fig)
     st.write(f"The device-wise efficiency visualization highlights variations in efficiency across devices.")
     
-    st.subheader("Average RPM")
-    st.write(f"The average RPM is: {avg_rpm}")
-    st.write(f"The average RPM gives an idea of the overall rotational speed.")
+    st.subheader("Average Grand Total")
+    st.write(f"The average Grand Total is: {avg_rpm}")
+    st.write(f"The average Grand Total gives an idea of the overall Item Price.")

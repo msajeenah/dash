@@ -393,8 +393,7 @@ if file is not None:
     # Read the CSV file data
     data = pd.read_csv(file)
     
-    # Perform data preprocessing
-    data['time'] = pd.to_datetime(data['time'])
+  
     
     # Calculate device-wise efficiency and average RPM
     data['Efficiency'] = data['SubTotal (Before Discount)'] / (data['SubTotal (Before Discount)'] + data['Item Discounted Price'])

@@ -352,7 +352,7 @@ if selected == "Market Basket analysis":
             fig = go.Figure(data=[go.Pie(labels=sector_counts.index, values=sector_counts, hole=0.6)])
             fig.update_layout(
                     title="Popular Sectors",
-                    width=300,  # Adjust the width to fit the expanded sidebar
+                    width=600,  # Adjust the width to fit the expanded sidebar
                     height=400,  # Adjust the height as needed
                 )
             st.plotly_chart(fig)

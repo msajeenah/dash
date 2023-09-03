@@ -81,7 +81,7 @@ if selected == "Dashboard":
     # Display the metrics in the Streamlit app
     col1, col2, col3 = st.columns(3)
     col1.metric("Total Number of Customers", total_societies, f"+{societies_in_past_30_days}", help="Shows Total Registered Society and changes in the last 30 days")
-    col2.metric("Total Number of Orders", f"{data['num_members'].sum()}", "-1", help="Active Members and changes in the last 30 days (**Note**: Contains sample data)")
+    col2.metric("Total Number of Orders", f"{data['Shipping Fees'].sum()}", "-1", help="Active Members and changes in the last 30 days (**Note**: Contains sample data)")
     col3.metric("Average Order Values", "32", "+2", help="Events organized and changes in the last 30 days (**Note**: Contains sample data)")
 
     st.sidebar.markdown("### Filters")
@@ -138,13 +138,13 @@ if selected == "Dashboard":
         st.plotly_chart(fig2)
 
     # Calculate the total number of members per sector
-    members_by_sector = filtered_data.groupby('sector_type')['num_members'].sum()
+    members_by_sector = filtered_data.groupby('sector_type')['Shipping Fees'].sum()
 
     # Convert the dictionary values to integers
     members_by_sector = members_by_sector.astype(int)
 
     # Calculate the total number of members per year
-    members_by_year = filtered_data.groupby('Year')['num_members'].sum()
+    members_by_year = filtered_data.groupby('Year')['Shipping Fees'].sum()
 
     # Convert the dictionary values to integers
     members_by_year = members_by_year.astype(int)
@@ -229,13 +229,13 @@ if selected == "Social media Analysis":
         st.plotly_chart(fig2)
 
     # Calculate the total number of members per sector
-    members_by_sector = filtered_data.groupby('sector_type')['num_members'].sum()
+    members_by_sector = filtered_data.groupby('sector_type')['Shipping Fees'].sum()
 
     # Convert the dictionary values to integers
     members_by_sector = members_by_sector.astype(int)
 
     # Calculate the total number of members per year
-    members_by_year = filtered_data.groupby('Year')['num_members'].sum()
+    members_by_year = filtered_data.groupby('Year')['Shipping Fees'].sum()
 
     # Convert the dictionary values to integers
     members_by_year = members_by_year.astype(int)
@@ -258,7 +258,7 @@ if selected == "Market Basket analysis":
     data = load_data()
 
     # Check if the DataFrame has the required columns
-    required_columns = ['society_name', 'address', 'state', 'district', 'registration_date', 'area_of_operation', 'sector_type']
+    required_columns = ['Customer Email', 'address', 'state', 'district', 'registration_date', 'area_of_operation', 'sector_type']
     missing_columns = [col for col in required_columns if col not in data.columns]
 
     if missing_columns:

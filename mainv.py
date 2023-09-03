@@ -344,7 +344,7 @@ if selected == "Market Basket analysis":
         col2.metric("Active Members", random_number, f"+{active_members_change}", help="Active Members and changes in the last 30 days (**Note**: Contains sample data)")
 
 
-        c1, c2 = st.columns((4,6))
+        c1, c2 = st.column((4,6))
 
         with c1:
             # Popular sectors

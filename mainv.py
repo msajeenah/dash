@@ -165,8 +165,9 @@ if selected == "Social media Analysis":
 
 st.markdown("Social media Analysis")
 image = Image.open("bright campaign.png")
-st.image(image, caption='Sunrise by the mountains')
-            
+
+    container.image(image, width=200)
+    container.write(" #   Beesline Data Analysis and Visualization # ")       
 
 if selected == "Market Basket analysis":
     st.markdown("## Market Basket analysis")

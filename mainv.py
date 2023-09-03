@@ -383,7 +383,7 @@ if selected == "Market Basket analysis":
 
 if selected == "Data Visulaization":
     st.markdown("## Data Visulaization")
-st.text("There's a sharp drop in inertia when moving from 2 to 3 clusters, and another noticeable decrease from 3 to 4 clusters. After that, the rate of decrease becomes more gradual. Therefore, the "elbow" seems to be around K=3 or K=4.
+st.text("There's a sharp drop in inertia when moving from 2 to 3 clusters, and another noticeable decrease from 3 to 4 clusters. After that, the rate of decrease becomes more gradual. Therefore, the elbow seems to be around K=3 or K=4.
 The highest silhouette score is 0.9946 for K=2. However, this unusually high silhouette score might suggest that one cluster is much larger than the other, which might not be very informative. The next highest scores are 0.5959 for K=4 and 0.5952 for K=5, which are quite close.
 
 Considering the insights from both methods, the optimal number of clusters for the dataset appears to be 4. This choice strikes a balance between maintaining compact, well-defined clusters and ensuring that the segmentation is informative and actionable.")

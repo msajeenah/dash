@@ -72,9 +72,9 @@ if selected == "Dashboard":
 
     # Display the metrics in the Streamlit app
     col1, col2, col3 = st.columns(3)
-    col1.metric("Registered Societies", total_societies, f"+{societies_in_past_30_days}", help="Shows Total Registered Society and changes in the last 30 days")
-    col2.metric("Active members", f"{data['num_members'].sum()}", "-1", help="Active Members and changes in the last 30 days (**Note**: Contains sample data)")
-    col3.metric("Events Organized", "32", "+2", help="Events organized and changes in the last 30 days (**Note**: Contains sample data)")
+    col1.metric("Total Number of Customers", total_societies, f"+{societies_in_past_30_days}", help="Shows Total Registered Society and changes in the last 30 days")
+    col2.metric("Total Number of Orders", f"{data['num_members'].sum()}", "-1", help="Active Members and changes in the last 30 days (**Note**: Contains sample data)")
+    col3.metric("Average Order Values", "32", "+2", help="Events organized and changes in the last 30 days (**Note**: Contains sample data)")
 
     st.sidebar.markdown("### Filters")
 

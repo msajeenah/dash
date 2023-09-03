@@ -386,16 +386,4 @@ if selected == "Data Visulaization":
 st.text("There's a sharp drop in inertia when moving from 2 to 3 clusters, and another noticeable decrease from 3 to 4 clusters. After that, the rate of decrease becomes more gradual. Therefore, the "elbow" seems to be around K=3 or K=4.
 The highest silhouette score is 0.9946 for K=2. However, this unusually high silhouette score might suggest that one cluster is much larger than the other, which might not be very informative. The next highest scores are 0.5959 for K=4 and 0.5952 for K=5, which are quite close.
 
-Considering the insights from both methods, the optimal number of clusters for the dataset appears to be 4. This choice strikes a balance between maintaining compact, well-defined clusters and ensuring that the segmentation is informative and actionable.
-
-Model	Train Silhouette Score	Test Silhouette Score	Train Davies Bouldin Score	Test Davies Bouldin Score	Clusters	Specifications
-1	0.5959	0.5976	0.3008	0.4098	3	standard model
-2	0.5259	0.5363	0.6241	0.7483	4	800 initiations
-3	0.5514	0.5329	0.5692	0.5930	3	MinMax scaler
-4	0.4612	0.4432	0.6986	0.9702	3	300 initiations
-5	0.4529	0.4572	0.5824	0.5770	3	300 initiations, removing extremes
-Fig. 21 K-Means Model Selection & Evaluation
-The above table, Fig. 21, showcases the performance of five different models aimed at segmenting customers using the RFM methodology and the K-means clustering technique:
-
-Model 1: Using the standard model with 3 clusters, this model achieved the highest Silhouette Scores of 0.5959 and 0.5976 for training and testing datasets, respectively. The Davies Bouldin Scores are also relatively low, indicating a decent clustering.
-")
+Considering the insights from both methods, the optimal number of clusters for the dataset appears to be 4. This choice strikes a balance between maintaining compact, well-defined clusters and ensuring that the segmentation is informative and actionable.")

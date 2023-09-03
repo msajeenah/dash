@@ -96,7 +96,7 @@ if selected == "Dashboard":
     else:
         selected_sectors = []
 
-    st.markdown("#### Registration Trends")
+    st.markdown("#### CLV Per Cluster")
 
     if selected_years:
         filtered_data = data[data['Year'].between(selected_years[0], selected_years[1])]
@@ -109,7 +109,7 @@ if selected == "Dashboard":
     # Format x-axis label as string
     fig = px.line(yearly_registration, x='Year', y='Registrations')
     fig.update_xaxes(title="Year")
-    fig.update_yaxes(title="Number of Registrations")
+    fig.update_yaxes(title="Number of Clusters")
     fig.update_layout(height=250, width=400)
     st.plotly_chart(fig, use_container_width=True)
 
@@ -117,7 +117,7 @@ if selected == "Dashboard":
 
     with r1:
 
-        st.markdown("#### Sector Distribution")
+        st.markdown("#### Pie Chart")
 
         if selected_sectors:
             filtered_sector_counts = data[data['sector_type'].isin(selected_sectors)]['sector_type'].value_counts()

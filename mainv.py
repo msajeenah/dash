@@ -388,7 +388,7 @@ if selected == "Market Basket analysis":
         st.dataframe(filtered_df)
 
 if selected == "RFM Analysis":
-      with st.container():
+
     st.markdown("## Interactive Plot to Analysis Final RFM Segments")
 
 

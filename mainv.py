@@ -386,8 +386,8 @@ if selected == "Market Basket analysis":
         st.markdown('#### Details')
         st.dataframe(filtered_df)
 
-if selected == "Data Visulaization":
-    st.markdown("## Data Visulaization")
+if selected == "RFM Analysis":
+    st.markdown("## Interactive Plot to Analysis Final RFM Segments")
 
 import streamlit as st
 import pandas as pd

@@ -66,6 +66,7 @@ def load_data():
 
 
 if selected == "Dashboard":
+      with st.container():
     data = load_data()
     st.markdown('## Beesline Data Analysis')
     total_societies = len(data)

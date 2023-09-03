@@ -162,14 +162,10 @@ if selected == "Dashboard":
 
 
 if selected == "Social media Analysis":
-
-
-def main():
 image = Image.open("bright campaign.png")
-
-    container.image(image, width=200)
+container.image(image, width=200)
     container.write(" #   Beesline Data Analysis and Visualization # ")       
-main()
+
 if selected == "Market Basket analysis":
     st.markdown("## Market Basket analysis")
     data = load_data()

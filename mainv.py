@@ -365,7 +365,7 @@ if selected == "Market Basket analysis":
                 title="Cumulative Number of Registered Societies over Time",
                 xaxis_title="Date",
                 yaxis_title="Cumulative Number of Societies",
-                width=550,  # Adjust the width to fit the expanded sidebar
+                width=950,  # Adjust the width to fit the expanded sidebar
                 height=400,  # Adjust the height as needed
             )
             st.plotly_chart(fig)

@@ -164,7 +164,7 @@ if selected == "Dashboard":
 if selected == "Social media Analysis":
       data = load_data()
 image = Image.open("bright campaign.png")
-container.image(image, width=200)
+
       
 
 if selected == "Market Basket analysis":

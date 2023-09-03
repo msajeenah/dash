@@ -66,7 +66,7 @@ def load_data():
 
 
 if selected == "Dashboard":
-      with st.container():
+    
     data = load_data()
     st.markdown('## Beesline Data Analysis')
     total_societies = len(data)
@@ -388,14 +388,10 @@ if selected == "Market Basket analysis":
         st.dataframe(filtered_df)
 
 if selected == "RFM Analysis":
+      with st.container():
     st.markdown("## Interactive Plot to Analysis Final RFM Segments")
 
-import streamlit as st
-import pandas as pd
-import numpy as np
-import altair as alt
-import pydeck as pdk
-import plotly.express as px
+
 
 
 

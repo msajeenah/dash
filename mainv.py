@@ -384,8 +384,7 @@ if selected == "Market Basket analysis":
 if selected == "Data Visulaization":
     st.markdown("## Data Visulaization")
 
-
-DATA_FILE = 'rfm_segments.csv'
+df = pd.read_csv('rfm_segments.csv')
 
 st.title("Interactive Plot to Analysis Final RFM Segments")
 

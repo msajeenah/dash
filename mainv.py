@@ -389,7 +389,7 @@ if selected == "Market Basket analysis":
 
 if selected == "RFM Analysis":
 
-    st.title("## Interactive Plot to Analysis Final RFM Segments")
+    st.title(" Interactive Plot to Analysis Final RFM Segments")
 
 
 @st.cache(persist=True)

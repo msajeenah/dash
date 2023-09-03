@@ -163,7 +163,7 @@ if selected == "Dashboard":
 
 if selected == "Social media Analysis":
 
-
+st.markdown("Social media Analysis")
 image = Image.open("bright campaign.png")
 st.image(image, caption='Sunrise by the mountains')
             

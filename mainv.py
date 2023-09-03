@@ -163,7 +163,7 @@ if selected == "Dashboard":
 
 if selected == "Social media Analysis":
 
-st.markdown("Social media Analysis")
+
 def main():
 image = Image.open("bright campaign.png")
 

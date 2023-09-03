@@ -392,11 +392,6 @@ if selected == "RFM Analysis":
     st.markdown("## Interactive Plot to Analysis Final RFM Segments")
 
 
-
-
-
-st.title("Interactive Plot to Analysis Final RFM Segments")
-
 @st.cache(persist=True)
 def load_data():
     data = pd.read_csv(DATA_FILE)

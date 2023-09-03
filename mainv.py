@@ -11,6 +11,11 @@ import random
 from PIL import Image
 import pydeck as pdk
 import altair as alt
+
+DATA_FILE = 'rfm_segments.csv'
+
+
+
 # Page setting
 st.set_page_config(
     page_title="Beesline Dashboard",
@@ -391,7 +396,7 @@ import altair as alt
 import pydeck as pdk
 import plotly.express as px
 
-DATA_FILE = 'rfm_segments.csv'
+
 
 st.title("Interactive Plot to Analysis Final RFM Segments")
 

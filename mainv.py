@@ -165,7 +165,7 @@ if selected == "Social media Analysis":
       data = load_data()
 image = Image.open("bright campaign.png")
 container.image(image, width=200)
-    container.write(" #   Beesline Data Analysis and Visualization # ")       
+    container.write("Beesline Data Analysis and Visualization")       
 
 if selected == "Market Basket analysis":
     st.markdown("## Market Basket analysis")

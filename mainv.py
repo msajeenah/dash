@@ -249,7 +249,7 @@ if selected == "Social media Analysis":
     r2.metric("products criteria", "")
     for sector, count in members_by_sector.items():
         r2.write(f"{sector}: {count}")
-image = Image.open('bright campaign.png')
+image = Image.open("bright campaign.png")
 st.image(image, caption='Sunrise by the mountains')
             
 

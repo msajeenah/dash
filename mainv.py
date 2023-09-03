@@ -9,6 +9,8 @@ import datetime
 import string
 import random
 from PIL import Image
+import pydeck as pdk
+import altair as alt
 # Page setting
 st.set_page_config(
     page_title="Beesline Dashboard",

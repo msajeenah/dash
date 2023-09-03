@@ -164,7 +164,7 @@ if selected == "Dashboard":
 if selected == "Social media Analysis":
       data = load_data()
 image = Image.open("bright campaign.png")
-
+st.image(image, caption='Sunrise by the mountains')
       
 
 if selected == "Market Basket analysis":

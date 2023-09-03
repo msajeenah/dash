@@ -344,7 +344,7 @@ if selected == "Market Basket analysis":
         col2.metric("Active Members", random_number, f"+{active_members_change}", help="Active Members and changes in the last 30 days (**Note**: Contains sample data)")
 
 
-        c1, c2 = st.column((4,6))
+        c1, c2 = st.columns((4,6))
 
         with c1:
             # Popular sectors
@@ -353,7 +353,7 @@ if selected == "Market Basket analysis":
             fig.update_layout(
                     title="Popular Sectors",
                     width=600,  # Adjust the width to fit the expanded sidebar
-                    height=600,  # Adjust the height as needed
+                    height=400,  # Adjust the height as needed
                 )
             st.plotly_chart(fig)
 

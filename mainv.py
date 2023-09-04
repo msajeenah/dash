@@ -66,6 +66,7 @@ def load_data():
 
 
 if selected == "Dashboard":
+     data = load_data()
      st.header("Beesline Dashboard")
      image = Image.open("Beesline.png")
      st.image(image, caption=None, width=None, use_column_width=True, clamp=False, channels="RGB", output_format="auto")

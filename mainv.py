@@ -134,7 +134,7 @@ if selected == "Dashboard":
 
         # Example: Pie chart of sector distribution
         sector_distribution = filtered_sector_counts  # Use the filtered counts for the pie chart
-        fig2 = px.pie(sector_distribution, values=sector_distribution.values, names=sector_distribution.index, height=600, width=400)
+        fig2 = px.pie(sector_distribution, values=sector_distribution.values, names=sector_distribution.index, height=900, width=900)
         st.plotly_chart(fig2)
 
     # Calculate the total number of members per sector

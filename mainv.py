@@ -65,9 +65,11 @@ def load_data():
     return pd.read_csv(r"datasetv2.csv", na_values=["NA", "--", "NaN"])
 
 
-if selected == "Dashboard":
-      data = load_data()
+    if selected == "Dashboard":
+     st.header("Instant Bright Campaign")
+     data = load_data()
       total_societies = len(data)
+    
     # Calculate the date 30 days ago from today
     start_date = datetime.datetime.now() - datetime.timedelta(days=30)
     start_date = start_date.strftime("%Y-%m-%d")

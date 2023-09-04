@@ -305,20 +305,26 @@ if selected == "Market Basket analysis":
         st.dataframe(filtered_df)
 
 if selected == "Sales Forecasting":
-     st.header("Instant Bright Campaign")
+     st.header("Time Series Prior to Differencing ")
      data = load_data()
-     image = Image.open("bright campaign.png")
+     image = Image.open("tspr.png")
      st.image(image, caption=None, width=None, use_column_width=True, clamp=False, channels="RGB", output_format="auto")
-     st.header("Correlation of Post Frequency and Engagement:")
+     st.header("Time Series Post Differencing")
      data = load_data()
-     image = Image.open("post freq.png")
+     image = Image.open("tsprd.png")
      st.image(image, caption=None, width=None, use_column_width=True, clamp=False, channels="RGB", output_format="auto")
-     image = Image.open("daily eng.png")
+    st.header("Residuals Distribution ")
+     image = Image.open("rd.png")
      st.image(image, caption=None, width=None, use_column_width=True, clamp=False, channels="RGB", output_format="auto")
-     st.header("Wordcloud Insights")
-     image = Image.open("wordcloud.png")
+     st.header("ACF Residuals")
+     image = Image.open("acf.png")
+     st.image(image, caption=None, width=None, use_column_width=True, clamp=False, channels="RGB", output_format="auto")
+     st.header("Actual V. Forecast Values")
+     image = Image.open("afv.png")
      st.image(image, caption=None, width=None, use_column_width=True, clamp=False, channels="RGB", output_format="auto")  
-
+     st.header("LSTM: Historical & Forecast Data")
+     image = Image.open("lstm.png")
+     st.image(image, caption=None, width=None, use_column_width=True, clamp=False, channels="RGB", output_format="auto")  
 
 
 

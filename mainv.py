@@ -315,7 +315,7 @@ def load_data():
     data = data[(data['MonetaryValue'] > 0) & (data['Recency'] <=360) & (data['Frequency'] <= 100)]
     return data
 
-data = load_data()
+
 segments = data['Customer Segment'].unique()
 
 #build app filters

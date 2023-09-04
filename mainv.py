@@ -309,7 +309,7 @@ if selected == "RFM Analysis":
     st.title(" Interactive Plot to Analysis Final RFM Segments")
 
 DATA_FILE = 'rfm_segments.csv'
-@st.cache(persist=True)
+
 def load_data():
     data = pd.read_csv(DATA_FILE)
     data = data[(data['MonetaryValue'] > 0) & (data['Recency'] <=360) & (data['Frequency'] <= 100)]

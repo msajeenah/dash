@@ -156,9 +156,9 @@ if selected == "Dashboard":
 
      # Display members by sector
     
-r2.metric("Members by Sector", "")
-    for sector, count in members_by_sector.items():
-        r2.write(f"{sector}: {count}")
+    r2.metric("Members by Sector", "")
+     for sector, count in members_by_sector.items():
+     r2.write(f"{sector}: {count}")
 
 
 if selected == "Social media Analysis":

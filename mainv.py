@@ -118,7 +118,7 @@ if selected == "Dashboard":
     fig = px.line(yearly_registration, x='Year', y='Registrations')
     fig.update_xaxes(title="Year")
     fig.update_yaxes(title="Number of Clusters")
-    fig.update_layout(height=250, width=400)
+    fig.update_layout(height=100, width=100)
     st.plotly_chart(fig, use_container_width=True)
 
     r1, r2 = st.columns((7, 3))

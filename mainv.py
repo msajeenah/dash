@@ -166,7 +166,7 @@ if selected == "Social media Analysis":
      data = load_data()
      image = Image.open("bright campaign.png")
      st.image(image, caption=None, width=None, use_column_width=True, clamp=False, channels="RGB", output_format="auto")
-     st.header("Instant Bright Campaign")
+     st.header("Correlation of Post Frequency and Engagement:")
      data = load_data()
      image = Image.open("post freq.png")
      st.image(image, caption=None, width=None, use_column_width=True, clamp=False, channels="RGB", output_format="auto")

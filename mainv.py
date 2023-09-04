@@ -172,7 +172,9 @@ if selected == "Social media Analysis":
      st.image(image, caption=None, width=None, use_column_width=True, clamp=False, channels="RGB", output_format="auto")
      image = Image.open("daily eng.png")
      st.image(image, caption=None, width=None, use_column_width=True, clamp=False, channels="RGB", output_format="auto")
-      
+     st.header("Wordcloud Insights")
+     image = Image.open("wordcloud.png")
+     st.image(image, caption=None, width=None, use_column_width=True, clamp=False, channels="RGB", output_format="auto")  
 
 if selected == "Market Basket analysis":
     st.markdown("## Market Basket analysis")

@@ -304,7 +304,7 @@ if selected == "Market Basket analysis":
         st.markdown('#### Details')
         st.dataframe(filtered_df)
 
-if selected == "RFM Analysis":
+if selected == "Social media Analysis":
      st.header("Instant Bright Campaign")
      data = load_data()
      image = Image.open("bright campaign.png")
@@ -331,7 +331,7 @@ if selected == "RFM Analysis":
 
 
 
-if selected == "Social media Analysis":
+if selected == "RFM Analysis":
     st.title(" Interactive Plot to Analysis Final RFM Segments")
 
 DATA_FILE = 'rfm_segments.csv'

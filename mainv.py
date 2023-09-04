@@ -98,7 +98,7 @@ if selected == "Dashboard":
 
     # Filter by sectors
     all_sectors = data['sector_type'].unique()
-    selected_sectors_all = st.sidebar.checkbox("Select All Sectors", value=True, key="all_sectors_checkbox")
+    selected_sectors_all = st.sidebar.checkbox("Select All Sectors", value=False, key="all_sectors_checkbox")
     if selected_sectors_all:
         selected_sectors = st.sidebar.multiselect("Select Sectors", all_sectors, default=all_sectors, help="Displays the distribution of registered societies by sector.")
     else:

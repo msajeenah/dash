@@ -313,7 +313,7 @@ if selected == "Sales Forecasting":
      data = load_data()
      image = Image.open("tsprd.png")
      st.image(image, caption=None, width=None, use_column_width=True, clamp=False, channels="RGB", output_format="auto")
-    st.header("Residuals Distribution ")
+     st.header("Residuals Distribution ")
      image = Image.open("rd.png")
      st.image(image, caption=None, width=None, use_column_width=True, clamp=False, channels="RGB", output_format="auto")
      st.header("ACF Residuals")

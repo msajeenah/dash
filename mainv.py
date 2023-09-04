@@ -67,8 +67,8 @@ def load_data():
 
 if selected == "Dashboard":
      st.markdown('## Beesline Data Analysis')
-     total_societies = len(data)
-     data = load_data()
+      data = load_data()
+      total_societies = len(data)
     # Calculate the date 30 days ago from today
     start_date = datetime.datetime.now() - datetime.timedelta(days=30)
     start_date = start_date.strftime("%Y-%m-%d")

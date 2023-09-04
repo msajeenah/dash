@@ -68,7 +68,7 @@ def load_data():
     if selected == "Dashboard":
      st.header("Instant Bright Campaign")
      data = load_data()
-    total_societies = len(data)
+     total_societies = len(data)
     
     # Calculate the date 30 days ago from today
     start_date = datetime.datetime.now() - datetime.timedelta(days=30)

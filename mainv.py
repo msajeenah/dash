@@ -304,7 +304,7 @@ if selected == "Market Basket analysis":
         st.markdown('#### Details')
         st.dataframe(filtered_df)
 
-if selected == "Social media Analysis":
+if selected == "Sales Forecasting":
      st.header("Instant Bright Campaign")
      data = load_data()
      image = Image.open("bright campaign.png")

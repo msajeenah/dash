@@ -66,7 +66,6 @@ def load_data():
 
 
     if selected == "Dashboard":
-     st.header("Instant Bright Campaign")
      data = load_data()
      total_societies = len(data)
     

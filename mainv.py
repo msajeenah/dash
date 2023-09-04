@@ -162,7 +162,7 @@ if selected == "Dashboard":
 
 
 if selected == "Social media Analysis":
-     st.markdown("Instant Bright Campaign")
+     st.header("Instant Bright Campaign")
      data = load_data()
      image = Image.open("bright campaign.png")
      st.image(image, caption=None, width=None, use_column_width=True, clamp=False, channels="RGB", output_format="auto")

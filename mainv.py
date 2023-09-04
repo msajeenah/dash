@@ -121,7 +121,7 @@ if selected == "Dashboard":
     fig.update_layout(height=100, width=100)
     st.plotly_chart(fig, use_container_width=True)
 
-    r1, r2 = st.columns((10, 5))
+    r1, r2 = st.columns((20, 0))
 
     with r1:
 

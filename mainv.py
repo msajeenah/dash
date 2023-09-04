@@ -69,9 +69,8 @@ if selected == "Dashboard":
      st.header("Beesline Dashboard")
      image = Image.open("Beesline.png")
      st.image(image, caption=None, width=None, use_column_width=True, clamp=False, channels="RGB", output_format="auto")
-    data = load_data()
-    st.markdown('## Beesline Data Analysis')
-    total_societies = len(data)
+     st.markdown('## Beesline Data Analysis')
+     total_societies = len(data)
 
     # Calculate the date 30 days ago from today
     start_date = datetime.datetime.now() - datetime.timedelta(days=30)

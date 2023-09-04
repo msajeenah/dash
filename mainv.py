@@ -12,7 +12,7 @@ from PIL import Image
 import pydeck as pdk
 import altair as alt
 
-DATA_FILE = 'rfm_segments.csv'
+
 
 
 
@@ -308,7 +308,7 @@ if selected == "RFM Analysis":
 
     st.title(" Interactive Plot to Analysis Final RFM Segments")
 
-
+DATA_FILE = 'rfm_segments.csv'
 @st.cache(persist=True)
 def load_data():
     data = pd.read_csv(DATA_FILE)

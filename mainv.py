@@ -48,7 +48,7 @@ with open('style.css') as f:
 with st.sidebar:
     selected= option_menu(
         menu_title=None,
-        options=["Dashboard", "Social media Analysis", "Market Basket analysis","RFM Analysis, Sales Forecasting"],
+        options=["Dashboard", "Social media Analysis", "Market Basket analysis","Sales Forecasting","RFM Analysis"],
         icons=["speedometer2","person-add","bar-chart", "info-circle","bar-chart"],
         default_index=0,
         styles= {
